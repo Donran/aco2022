@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
-data = "\n".join(list(map(lambda x: x.replace("\n", ""), open("day1.in").readlines())))
-print("star1:{}".format(max([sum(int(i) for i in x.split("\n")) for x in data.split("\n\n")])))
-print("star2:{}".format(sum(sorted([sum(int(i) for i in x.split("\n")) for x in data.split("\n\n")], reverse=True)[:3])))
+data = [d.split("\n") for d in __import__("sys").stdin.read().split("\n\n")[:-1]]
+print(data)
+print("star1:{}".format(max([sum(int(i) for i in x) for x in data])))
+print("star2:{}".format(sum(sorted([sum(int(i) for i in x) for x in data], reverse=True)[:3])))
