@@ -25,22 +25,19 @@ class RopePart:
         elif direction == "R": self.pos.x += 1
         self.visited_positions.append((self.pos.x, self.pos.y))
 
-    def move(self, parent_position):
+    def move(self, parent):
 
-        x_diff = parent_position.x - self.pos.x
-        x_dir = 1 if parent_position.x > self.pos.x else -1
-
-        y_diff = parent_position.y - self.pos.y
-        y_dir = 1 if parent_position.y > self.pos.y else -1
+        x_diff = parent.x - self.pos.x
+        y_diff = parent.y - self.pos.y
 
         if abs(x_diff) > 1:
-            self.pos.x += x_dir
+            self.pos.x += x_diff / abs(x_diff)
             if abs(y_diff) == 1:
-                self.pos.y += y_dir
+                self.pos.y = parent.y
         if abs(y_diff) > 1:
-            self.pos.y += y_dir
+            self.pos.y += y_diff / abs(y_diff)
             if abs(x_diff) == 1:
-                self.pos.x += x_dir
+                self.pos.x = parent.x
 
         self.visited_positions.append((self.pos.x, self.pos.y))
         self.move_child()
